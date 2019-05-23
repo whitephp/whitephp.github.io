@@ -1,0 +1,11 @@
+.p-name > a:visited {
+    color: #828282;
+}
+
+tr td {
+ vertical-align: top;
+}
+
+.sup-block {
+    float: right;
+}

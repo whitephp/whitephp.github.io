@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-23T15:58:38-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PHP</title><subtitle>PHP, Functional programing, Labmda calculus, Y combinator, Interperter.</subtitle><entry><title type="html">The Little PHPer - 2. Do It, Do It Again, and Again, and Again…</title><link href="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html" rel="alternate" type="text/html" title="The Little PHPer - 2. Do It, Do It Again, and Again, and Again..." /><published>2018-05-03T00:00:00-07:00</published><updated>2018-05-03T00:00:00-07:00</updated><id>http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again</id><content type="html" xml:base="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html">&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;
+                Scheme
+            &lt;/th&gt;
+            &lt;th&gt;
+                PHP
+            &lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;pre&gt;
+(define foo
+  (lambda (a b c) 
+    (body
+    )))
+                &lt;/pre&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;pre&gt;
+function foo        |       $foo = function
+($a, $b, $c)        |       ($a, $b, $c) use (&amp;amp;$foo)
+{return             |       {return
+    body;           |           body;
+}                   |       }&lt;/pre&gt;
+                &lt;div class=&quot;sup-block&quot;&gt;&lt;sup&gt;&lt;a href=&quot;#php-function&quot;&gt;[1]&lt;/a&gt;,&lt;/sup&gt; &lt;sup&gt;&lt;a href=&quot;#php-lambda&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;pre&gt;
+(cond 
+  (p1 e1)
+  (p2 e2)
+  ...
+  (else en))&lt;/pre&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+            &lt;br /&gt;
+                &lt;pre&gt;
+p1 ? e1 :
+p2 ? e2 :
+...
+en;&lt;/pre&gt;
+                &lt;div class=&quot;sup-block&quot;&gt;&lt;sup&gt;&lt;a href=&quot;#php-ternary&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                    #t
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;TRUE&lt;/code&gt; &lt;sup&gt;&lt;a href=&quot;#php-boolean&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                    #f
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                    FALSE
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                (or ...)
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;... or ...&lt;/code&gt; 
+                &lt;sup&gt;&lt;a href=&quot;#php-logical&quot;&gt;[5]&lt;/a&gt;&lt;/sup&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;pre&gt;
+(define lat?
+  (lambda l
+    (cond
+      ((null? l) #t)
+      ((atom? (car l)) (lat? (cdr l)))
+      (else #f))))
+                &lt;/pre&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_lat&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;is_nulll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TRUE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;is_atom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is_lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cdr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;pre&gt;
+(define member?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? (car lat) a)
+              (member? a (cdr lat)))))))&lt;/pre&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_member&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;is_nulll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FALSE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;is_eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is_member&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cdr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$lat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+    &lt;li id=&quot;php-function&quot;&gt;&lt;a href=&quot;https://www.php.net/manual/en/functions.user-defined.php&quot; target=&quot;_whitephp-ref&quot;&gt;PHP User-defined functions&lt;/a&gt;.&lt;/li&gt;
+    &lt;li id=&quot;php-lambda&quot;&gt;&lt;a href=&quot;https://www.php.net/manual/en/functions.anonymous.php&quot; target=&quot;_whitephp-ref&quot;&gt;PHP Anonymous functions&lt;/a&gt;.&lt;/li&gt;
+    &lt;li id=&quot;php-ternary&quot;&gt;&lt;a href=&quot;https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary&quot; target=&quot;_whitephp-ref&quot;&gt;PHP Ternary Operator&lt;/a&gt;.&lt;/li&gt;
+    &lt;li id=&quot;php-boolean&quot;&gt;&lt;a href=&quot;https://www.php.net/manual/en/language.types.boolean.php&quot; target=&quot;_whitephp-ref&quot;&gt;PHP Booleans&lt;/a&gt;.&lt;/li&gt;
+    &lt;li id=&quot;php-logical&quot;&gt;&lt;a href=&quot;https://www.php.net/manual/en/language.operators.logical.php&quot; target=&quot;_whitephp-ref&quot;&gt;PHP Logical&lt;/a&gt;.&lt;/li&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;amp;$foo) {return | {return body; | body; } | } [1], [2] (cond (p1 e1) (p2 e2) ... (else en)) p1 ? e1 : p2 ? e2 : ... en; [3] #t TRUE [4] #f FALSE (or ...) ... or ... [5] (define lat? (lambda l (cond ((null? l) #t) ((atom? (car l)) (lat? (cdr l))) (else #f)))) function is_lat ($l) {return is_nulll($l) ? TRUE : is_atom(car($l)) ? is_lat(cdr($l)) : FALSE; } (define member? (lambda (a lat) (cond ((null? lat) #f) (else (or (eq? (car lat) a) (member? a (cdr lat))))))) function is_member ($a, $lat) {return is_nulll($l) ? FALSE : is_eq($a, car($lat)) or is_member($a, cdr($lat)); }</summary></entry><entry><title type="html">The Little PHPer - 1. Toys</title><link href="http://localhost:4000/2018/05/01/the-little-phper-1-toys.html" rel="alternate" type="text/html" title="The Little PHPer - 1. Toys" /><published>2018-05-01T00:00:00-07:00</published><updated>2018-05-01T00:00:00-07:00</updated><id>http://localhost:4000/2018/05/01/the-little-phper-1-toys</id><content type="html" xml:base="http://localhost:4000/2018/05/01/the-little-phper-1-toys.html">&lt;style&gt;
+.wrapper {
+    max-width: 801px;   
+}
+
+tr td {
+    vertical-align: middle;   
+}
+&lt;/style&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;
+                Scheme
+            &lt;/th&gt;
+            &lt;th&gt;
+                PHP
+            &lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                atom
+            &lt;/td&gt;
+            &lt;td&gt;
+                non-array &lt;sup&gt;&lt;a href=&quot;#php-types&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                atom
+                &lt;/code&gt;&lt;br /&gt;
+                &lt;code&gt;
+                (quote atom)
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                'atom'
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                1492
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                1492
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                *abc$
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                '*abc$'
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                list &lt;sup&gt;&lt;a href=&quot;#s-expression&quot;&gt;[2]&lt;/a&gt;&lt;/sup&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                array &lt;sup&gt;&lt;a href=&quot;#php-array&quot;&gt;[3]&lt;/a&gt;&lt;/sup&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                (atom)
+                &lt;/code&gt;&lt;br /&gt;
+                &lt;code&gt;
+                (quote (atom))
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                ['atom']
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                (atom turkey or)
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                ['atom', 'turkey', 'or']
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                ((atom, turkey) or)
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                [['atom', 'turkey'], 'or']
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                (((how) are) ((you) (doing so)) far)
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                [[['how'], 'are'] [['you'], ['doing', 'so']], 'far']
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                ()
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                []
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                (() () ())
+                &lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;code&gt;
+                [[], [], []]
+                &lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;&lt;strong&gt;
+                car
+                &lt;/strong&gt;&lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;car&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; 
+    &lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;&lt;strong&gt;
+                cdr&lt;/strong&gt;&lt;/code&gt; 
+                &lt;sup&gt;&lt;a href=&quot;#car-and-cdr&quot;&gt;[4]&lt;/a&gt;&lt;/sup&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cdr&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; 
+    &lt;span class=&quot;nb&quot;&gt;array_slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;&lt;strong&gt;
+                cons
+                &lt;/strong&gt;&lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cons&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;array_merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;&lt;strong&gt;
+                null?
+                &lt;/strong&gt;&lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_nulll&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;&lt;strong&gt;
+                atom?
+                &lt;/strong&gt;&lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_atom&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;is_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;code&gt;&lt;strong&gt;eq?&lt;/strong&gt;&lt;/code&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_eq&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$s2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$s1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$s2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+    &lt;li id=&quot;php-types&quot;&gt;&lt;a href=&quot;https://php.net/manual/en/language.types.intro.php&quot; target=&quot;_whitephp-ref&quot;&gt;PHP Types&lt;/a&gt;.&lt;/li&gt;
+    &lt;li id=&quot;s-expression&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/S-expression&quot; target=&quot;_whitephp-ref&quot;&gt;S-expression&lt;/a&gt;.&lt;/li&gt;
+    &lt;li id=&quot;php-types&quot;&gt;&lt;a href=&quot;https://www.php.net/manual/en/language.types.array.php&quot; target=&quot;_whitephp-ref&quot;&gt;PHP Array&lt;/a&gt;, &lt;q&gt;treated as an array&lt;/q&gt;.&lt;/li&gt;
+    &lt;li id=&quot;car-and-cdr&quot;&gt;Why &lt;a href=&quot;https://en.wikipedia.org/wiki/CAR_and_CDR&quot; target=&quot;_whitephp-ref&quot;&gt;Car and Cdr&lt;/a&gt;?&lt;/li&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html"></summary></entry></feed>
