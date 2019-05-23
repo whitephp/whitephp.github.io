@@ -1,3 +1,7 @@
+.p-name > a {
+    color: #828282;
+}
+
 .p-name > a:visited {
     color: #828282;
 }
