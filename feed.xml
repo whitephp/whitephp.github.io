@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-23T15:58:38-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PHP</title><subtitle>PHP, Functional programing, Labmda calculus, Y combinator, Interperter.</subtitle><entry><title type="html">The Little PHPer - 2. Do It, Do It Again, and Again, and Again…</title><link href="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html" rel="alternate" type="text/html" title="The Little PHPer - 2. Do It, Do It Again, and Again, and Again..." /><published>2018-05-03T00:00:00-07:00</published><updated>2018-05-03T00:00:00-07:00</updated><id>http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again</id><content type="html" xml:base="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html">&lt;table&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-23T18:32:14-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PHP</title><subtitle>PHP, Functional programing, Labmda calculus, Y combinator, Interperter.</subtitle><entry><title type="html">The Little PHPer - 2. Do It, Do It Again, and Again, and Again…</title><link href="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html" rel="alternate" type="text/html" title="The Little PHPer - 2. Do It, Do It Again, and Again, and Again..." /><published>2018-05-03T00:00:00-07:00</published><updated>2018-05-03T00:00:00-07:00</updated><id>http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again</id><content type="html" xml:base="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html">&lt;table&gt;
     &lt;thead&gt;
         &lt;tr&gt;
             &lt;th&gt;
@@ -89,8 +89,7 @@ en;&lt;/pre&gt;
     (cond
       ((null? l) #t)
       ((atom? (car l)) (lat? (cdr l)))
-      (else #f))))
-                &lt;/pre&gt;
+      (else #f))))&lt;/pre&gt;
             &lt;/td&gt;
             &lt;td&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_lat&lt;/span&gt;
