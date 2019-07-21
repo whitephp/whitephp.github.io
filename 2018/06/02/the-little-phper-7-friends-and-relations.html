@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" /><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>The Little PHPer - 7. Friends and Relations | PHP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="The Little PHPer - 7. Friends and Relations" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="pair: consider only nonnegative integers. rel: a list of numbers, could be empty. finite function: a list of numbers, could be empty." />
+<meta property="og:description" content="pair: consider only nonnegative integers. rel: a list of numbers, could be empty. finite function: a list of numbers, could be empty." />
+<link rel="canonical" href="http://localhost:4000/2018/06/02/the-little-phper-7-friends-and-relations.html" />
+<meta property="og:url" content="http://localhost:4000/2018/06/02/the-little-phper-7-friends-and-relations.html" />
+<meta property="og:site_name" content="PHP" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-02T00:00:00-07:00" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/2018/06/02/the-little-phper-7-friends-and-relations.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/06/02/the-little-phper-7-friends-and-relations.html"},"description":"pair: consider only nonnegative integers. rel: a list of numbers, could be empty. finite function: a list of numbers, could be empty.","@type":"BlogPosting","headline":"The Little PHPer - 7. Friends and Relations","dateModified":"2018-06-02T00:00:00-07:00","datePublished":"2018-06-02T00:00:00-07:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css" />
+  <link rel="stylesheet" href="/assets/site.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="PHP" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">PHP</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Little PHPer - 7. Friends and Relations</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-06-02T00:00:00-07:00" itemprop="datePublished">Jun 2, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul>
+<li>
+<i>pair</i>: consider only nonnegative integers.
+</li>
+<li>
+<i>rel</i>: a list of numbers, could be empty.
+</li>
+<li>
+<i>finite function</i>: a list of numbers, could be empty.
+</li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Scheme
+            </th>
+            <th>
+                PHP
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+            <code>
+            set?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_set</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="k">TRUE</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="k">FALSE</span>
+      <span class="o">:</span> <span class="nx">is_set</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            makeset
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">makeset</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="nx">makeset</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span>
+      <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">makeset</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+<span class="p">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">makeset</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">makeset</span><span class="p">(</span><span class="nx">multirember</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            subset?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_subset</span>
+<span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$set1</span><span class="p">)</span> <span class="o">?</span> <span class="k">TRUE</span>
+    <span class="o">:</span> <span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">is_subset</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            eqset?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_eqset</span>
+<span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_subset</span><span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">is_subset</span><span class="p">(</span><span class="nv">$set2</span><span class="p">,</span> <span class="nv">$set1</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            intersect?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_intersect</span>
+<span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$set1</span><span class="p">)</span> <span class="o">?</span> <span class="k">FALSE</span>
+    <span class="o">:</span> <span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span> <span class="o">||</span> <span class="nx">is_intersect</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            intersect
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">intersect</span>
+<span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$set1</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$set1</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span> <span class="o">?</span> 
+        <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nx">intersect</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">))</span>
+      <span class="o">:</span> <span class="nx">intersect</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            union
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">union</span>
+<span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$set1</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$set2</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span> <span class="o">?</span> <span class="nx">union</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span>
+      <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nx">union</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            difference
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">difference</span>
+<span class="p">(</span><span class="nv">$set1</span><span class="p">,</span> <span class="nv">$set2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$set1</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_member</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span> <span class="o">?</span> <span class="nx">difference</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)</span> 
+      <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nx">difference</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$set1</span><span class="p">),</span> <span class="nv">$set2</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            intersectall
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">intersectall</span>
+<span class="p">(</span><span class="nv">$l_set</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l_set</span><span class="p">))</span> <span class="o">?</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l_set</span><span class="p">)</span>
+    <span class="o">:</span> <span class="nx">intersect</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l_set</span><span class="p">),</span> <span class="nx">intersectall</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l_set</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            a-pair?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_pair</span>
+<span class="p">(</span><span class="nv">$x</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_atom</span><span class="p">(</span><span class="nv">$x</span><span class="p">)</span> <span class="o">?</span> <span class="k">FALSE</span> 
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$x</span><span class="p">)</span> <span class="o">?</span> <span class="k">FALSE</span>
+      <span class="o">:</span> <span class="p">(</span><span class="nx">is_nulll</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$x</span><span class="p">))</span> <span class="o">?</span> <span class="k">FALSE</span> 
+        <span class="o">:</span> <span class="p">(</span><span class="nx">is_nulll</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$x</span><span class="p">)))</span> <span class="o">?</span> <span class="k">TRUE</span>
+          <span class="o">:</span> <span class="k">FALSE</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            first
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">use</span> <span class="k">function</span> <span class="nf">car</span> <span class="k">as</span> <span class="nx">first</span><span class="p">;</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            second
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">second</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">car</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            build
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">build</span>
+<span class="p">(</span><span class="nv">$s1</span><span class="p">,</span> <span class="nv">$s2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">cons</span><span class="p">(</span><span class="nv">$s1</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$s2</span><span class="p">,</span> <span class="p">[]));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            third
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">third</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">car</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            fun?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_fun</span>
+<span class="p">(</span><span class="nv">$rel</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_set</span><span class="p">(</span><span class="nx">firsts</span><span class="p">(</span><span class="nv">$rel</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            revpair
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">revpair</span>
+<span class="p">(</span><span class="nv">$pair</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">build</span><span class="p">(</span><span class="nx">second</span><span class="p">(</span><span class="nv">$pair</span><span class="p">),</span> <span class="nx">first</span><span class="p">(</span><span class="nv">$pair</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            revrel
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">revrel</span>
+<span class="p">(</span><span class="nv">$rel</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$rel</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$rel</span>
+    <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">revpair</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$rel</span><span class="p">)),</span> <span class="nx">revrel</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$rel</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            seconds
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">seconds</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">second</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">)),</span> <span class="nx">seconds</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            fullfun?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_fullfun</span>
+<span class="p">(</span><span class="nv">$fun</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_set</span><span class="p">(</span><span class="nx">seconds</span><span class="p">(</span><span class="nv">$fun</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            one2one?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_one2one</span>
+<span class="p">(</span><span class="nv">$fun</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_fun</span><span class="p">(</span><span class="nx">revrel</span><span class="p">(</span><span class="nv">$fun</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+    </tbody>
+</table>
+
+  </div><a class="u-url" href="/2018/06/02/the-little-phper-7-friends-and-relations.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      
+      <ul class="contact-list">
+          <li class="p-name">
+          &copy; 2019 <a href="/">whitePHP.net</a>
+          </li>
+          
+      </ul>
+      </div>
+
+      
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
