@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" /><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>The Little PHPer - 8. Lambda the Ultimate | PHP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="The Little PHPer - 8. Lambda the Ultimate" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Scheme PHP rember-f function rember_f ($test, $s, $l) {return is_nulll($l) ? [] : ($test(car($l), $s) ? cdr($l) : cons(car($l), rember_f($test, $s, cdr($l)))); } function rember_f ($test) {return function ($s, $l) use ($test) { return is_nulll($l) ? [] : ($test(car($l), $s) ? cdr($l) : cons(car($l), rember_f($test)($s, cdr($l)))); }; } eq?-c [1], [2], [3] function is_eq_c ($a) {return function ($x) use ($a) {return is_eq($x, $a); }; } eq?-salad $is_eq_salad = is_eq_c(&#39;salad&#39;); rember-eq? $rember_is_eq = rember_f(&#39;is_eq&#39;); insertL-f function insert_left_f ($test) {return function ($new_s, $old_s, $l) use ($test) {return is_nulll($l) ? [] : ($test(car($l), $old_s) ? cons($new_s, cons($old_s, cdr($l))) : cons(car($l), insert_left_f($test)($new_s, $old_s, cdr($l)))); }; } insertR-f function insert_right_f ($test) {return function($new_s, $old_s, $l) use ($test) {return is_nulll($l) ? [] : ($test(car($l), $old_s) ? cons($old_s, cons($new_s, cdr($l))) : cons(car($l), insert_right_f($test)($new_s, $old_s, cdr($l)))); }; } seqL function seq_l ($new_s, $old_s, $l) {return cons($new_s, cons($old_s, $l)); } seq_r function seq_r ($new_s, $old_s, $l) {return cons($old_s, cons($new_s, $l)); } seqS function seq_s ($new_s, $old_s, $l) {return cons($new_s, $l); } seqrem function seqrem ($new_s, $old_s, $l) {return $l; } insert-g function insert_g ($seq) {return function($new_s, $old_s, $l) use ($seq) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? $seq($new_s, $old_s, cdr($l)) : cons(car($l), insert_g($seq)($new_s, $old_s, cdr($l)))); }; } atom-to-function function atom_to_function ($operator) {return is_eq($operator, &#39;+&#39;) ? &#39;plus&#39; : (is_eq($operator, &#39;x&#39;) ? &#39;x&#39; : &#39;power&#39;); } value function value ($nexp) {return is_atom($nexp) ? $nexp : atom_to_function(operator($nexp)) (value(first_sub_exp($nexp)), value(second_sub_exp($nexp))); } multirember-f function multirember_f ($test) {return function($s, $l) use ($test) {return is_nulll($l) ? [] : ($test($s, car($l)) ? multirember_f($test)($s, cdr($l)) : cons(car($l), multirember_f($test)($s, cdr($l)))); }; } multirember-eq? $multirember_is_eq = multirember_f(&#39;is_eq&#39;); eq?-tuna $is_eq_tuna = is_eq_c(&#39;tuna&#39;); multirember&amp;co [4] function multirember_co ($s, $l, $col) {return is_nulll($l) ? $col([], []) : (is_eq($s, car($l)) ? multirember_co($s, cdr($l), function ($new_l, $seen) use ($col, $l) {return // new-friend $col($new_l, cons(car($l), $seen)); }) : (multirember_co($s, cdr($l), function ($new_l, $seen) use ($col, $l) {return // latest-friend $col(cons(car($l), $new_l), $seen); }))); } a-friend function a_friend ($s_1, $s_2) {return is_nulll($s_2); } last-friend function last_friend ($new_l, $seen) {return length($new_l); } multiinsertLR function multiinsert_left_right ($new_s, $old_L, $old_R, $l) {return is_nulll($l) ? [] : (is_eq($old_L, car($l)) ? cons($new_s, cons($old_L, multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))) : (is_eq($old_R, car($l)) ? cons($old_R, cons($new_s, multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))) : (cons(car($l), multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))))); } multiinsertLR&amp;co function multiinsert_left_right_co ($new_s, $old_L, $old_R, $l, $col) {return is_nulll($l) ? $col([], 0, 0) : (is_eq($old_L, car($l)) ? multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $new_s, $old_L) {return $col(cons($new_s, cons($old_L, $new_l)), add1($n_L), $n_R); }) : (is_eq($old_R, car($l)) ? multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $new_s, $old_R) {return $col(cons($old_R, cons($new_s, $new_l)), $n_L, add1($n_R)); }) : (multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $l) {return $col(cons(car($l), $new_l), $n_L, $n_R); })))); } even? function is_even ($n) {return is_eqn($n, x(division($n, 2), 2)); } evens-only* function evens_only_star ($l) {return is_nulll($l) ? [] : (is_atom(car($l)) ? is_even(car($l)) ? cons(car($l), evens_only_star(cdr($l))) : evens_only_star(cdr($l)) : cons(evens_only_star(car($l)), evens_only_star(cdr($l)))); } evens-only*&amp;co function evens_only_star_co ($l, $col) {return is_nulll($l) ? $col([], 1, 0) : (is_atom(car($l)) ? is_even(car($l)) ? evens_only_star_co(cdr($l), function ($new_l, $product, $sum) use ($col, $l) {return $col(cons(car($l), $new_l), x(car($l), $product), $sum); }) : evens_only_star_co(cdr($l), function ($new_l, $product, $sum) use ($col, $l) {return $col($new_l, $product, plus(car($l), $sum)); }) : evens_only_star_co(car($l), function ($a_l, $a_product, $a_sum) use ($col, $l) {return evens_only_star_co(cdr($l), function($d_l, $d_product, $d_sum) use ($col, $l, $a_l, $a_product, $a_sum) {return $col(cons($a_l, $d_l), x($a_product, $d_product), plus($a_sum, $d_sum)); }); })); } the-last-friend function the_last_friend ($new_l, $product, $sum) {return cons($sum, cons($product, $new_l)); }" />
+<meta property="og:description" content="Scheme PHP rember-f function rember_f ($test, $s, $l) {return is_nulll($l) ? [] : ($test(car($l), $s) ? cdr($l) : cons(car($l), rember_f($test, $s, cdr($l)))); } function rember_f ($test) {return function ($s, $l) use ($test) { return is_nulll($l) ? [] : ($test(car($l), $s) ? cdr($l) : cons(car($l), rember_f($test)($s, cdr($l)))); }; } eq?-c [1], [2], [3] function is_eq_c ($a) {return function ($x) use ($a) {return is_eq($x, $a); }; } eq?-salad $is_eq_salad = is_eq_c(&#39;salad&#39;); rember-eq? $rember_is_eq = rember_f(&#39;is_eq&#39;); insertL-f function insert_left_f ($test) {return function ($new_s, $old_s, $l) use ($test) {return is_nulll($l) ? [] : ($test(car($l), $old_s) ? cons($new_s, cons($old_s, cdr($l))) : cons(car($l), insert_left_f($test)($new_s, $old_s, cdr($l)))); }; } insertR-f function insert_right_f ($test) {return function($new_s, $old_s, $l) use ($test) {return is_nulll($l) ? [] : ($test(car($l), $old_s) ? cons($old_s, cons($new_s, cdr($l))) : cons(car($l), insert_right_f($test)($new_s, $old_s, cdr($l)))); }; } seqL function seq_l ($new_s, $old_s, $l) {return cons($new_s, cons($old_s, $l)); } seq_r function seq_r ($new_s, $old_s, $l) {return cons($old_s, cons($new_s, $l)); } seqS function seq_s ($new_s, $old_s, $l) {return cons($new_s, $l); } seqrem function seqrem ($new_s, $old_s, $l) {return $l; } insert-g function insert_g ($seq) {return function($new_s, $old_s, $l) use ($seq) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? $seq($new_s, $old_s, cdr($l)) : cons(car($l), insert_g($seq)($new_s, $old_s, cdr($l)))); }; } atom-to-function function atom_to_function ($operator) {return is_eq($operator, &#39;+&#39;) ? &#39;plus&#39; : (is_eq($operator, &#39;x&#39;) ? &#39;x&#39; : &#39;power&#39;); } value function value ($nexp) {return is_atom($nexp) ? $nexp : atom_to_function(operator($nexp)) (value(first_sub_exp($nexp)), value(second_sub_exp($nexp))); } multirember-f function multirember_f ($test) {return function($s, $l) use ($test) {return is_nulll($l) ? [] : ($test($s, car($l)) ? multirember_f($test)($s, cdr($l)) : cons(car($l), multirember_f($test)($s, cdr($l)))); }; } multirember-eq? $multirember_is_eq = multirember_f(&#39;is_eq&#39;); eq?-tuna $is_eq_tuna = is_eq_c(&#39;tuna&#39;); multirember&amp;co [4] function multirember_co ($s, $l, $col) {return is_nulll($l) ? $col([], []) : (is_eq($s, car($l)) ? multirember_co($s, cdr($l), function ($new_l, $seen) use ($col, $l) {return // new-friend $col($new_l, cons(car($l), $seen)); }) : (multirember_co($s, cdr($l), function ($new_l, $seen) use ($col, $l) {return // latest-friend $col(cons(car($l), $new_l), $seen); }))); } a-friend function a_friend ($s_1, $s_2) {return is_nulll($s_2); } last-friend function last_friend ($new_l, $seen) {return length($new_l); } multiinsertLR function multiinsert_left_right ($new_s, $old_L, $old_R, $l) {return is_nulll($l) ? [] : (is_eq($old_L, car($l)) ? cons($new_s, cons($old_L, multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))) : (is_eq($old_R, car($l)) ? cons($old_R, cons($new_s, multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))) : (cons(car($l), multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))))); } multiinsertLR&amp;co function multiinsert_left_right_co ($new_s, $old_L, $old_R, $l, $col) {return is_nulll($l) ? $col([], 0, 0) : (is_eq($old_L, car($l)) ? multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $new_s, $old_L) {return $col(cons($new_s, cons($old_L, $new_l)), add1($n_L), $n_R); }) : (is_eq($old_R, car($l)) ? multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $new_s, $old_R) {return $col(cons($old_R, cons($new_s, $new_l)), $n_L, add1($n_R)); }) : (multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $l) {return $col(cons(car($l), $new_l), $n_L, $n_R); })))); } even? function is_even ($n) {return is_eqn($n, x(division($n, 2), 2)); } evens-only* function evens_only_star ($l) {return is_nulll($l) ? [] : (is_atom(car($l)) ? is_even(car($l)) ? cons(car($l), evens_only_star(cdr($l))) : evens_only_star(cdr($l)) : cons(evens_only_star(car($l)), evens_only_star(cdr($l)))); } evens-only*&amp;co function evens_only_star_co ($l, $col) {return is_nulll($l) ? $col([], 1, 0) : (is_atom(car($l)) ? is_even(car($l)) ? evens_only_star_co(cdr($l), function ($new_l, $product, $sum) use ($col, $l) {return $col(cons(car($l), $new_l), x(car($l), $product), $sum); }) : evens_only_star_co(cdr($l), function ($new_l, $product, $sum) use ($col, $l) {return $col($new_l, $product, plus(car($l), $sum)); }) : evens_only_star_co(car($l), function ($a_l, $a_product, $a_sum) use ($col, $l) {return evens_only_star_co(cdr($l), function($d_l, $d_product, $d_sum) use ($col, $l, $a_l, $a_product, $a_sum) {return $col(cons($a_l, $d_l), x($a_product, $d_product), plus($a_sum, $d_sum)); }); })); } the-last-friend function the_last_friend ($new_l, $product, $sum) {return cons($sum, cons($product, $new_l)); }" />
+<link rel="canonical" href="http://localhost:4000/2018/06/23/the-little-phper-8-lambda-the-ultimate.html" />
+<meta property="og:url" content="http://localhost:4000/2018/06/23/the-little-phper-8-lambda-the-ultimate.html" />
+<meta property="og:site_name" content="PHP" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-23T00:00:00-07:00" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/2018/06/23/the-little-phper-8-lambda-the-ultimate.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/06/23/the-little-phper-8-lambda-the-ultimate.html"},"description":"Scheme PHP rember-f function rember_f ($test, $s, $l) {return is_nulll($l) ? [] : ($test(car($l), $s) ? cdr($l) : cons(car($l), rember_f($test, $s, cdr($l)))); } function rember_f ($test) {return function ($s, $l) use ($test) { return is_nulll($l) ? [] : ($test(car($l), $s) ? cdr($l) : cons(car($l), rember_f($test)($s, cdr($l)))); }; } eq?-c [1], [2], [3] function is_eq_c ($a) {return function ($x) use ($a) {return is_eq($x, $a); }; } eq?-salad $is_eq_salad = is_eq_c(&#39;salad&#39;); rember-eq? $rember_is_eq = rember_f(&#39;is_eq&#39;); insertL-f function insert_left_f ($test) {return function ($new_s, $old_s, $l) use ($test) {return is_nulll($l) ? [] : ($test(car($l), $old_s) ? cons($new_s, cons($old_s, cdr($l))) : cons(car($l), insert_left_f($test)($new_s, $old_s, cdr($l)))); }; } insertR-f function insert_right_f ($test) {return function($new_s, $old_s, $l) use ($test) {return is_nulll($l) ? [] : ($test(car($l), $old_s) ? cons($old_s, cons($new_s, cdr($l))) : cons(car($l), insert_right_f($test)($new_s, $old_s, cdr($l)))); }; } seqL function seq_l ($new_s, $old_s, $l) {return cons($new_s, cons($old_s, $l)); } seq_r function seq_r ($new_s, $old_s, $l) {return cons($old_s, cons($new_s, $l)); } seqS function seq_s ($new_s, $old_s, $l) {return cons($new_s, $l); } seqrem function seqrem ($new_s, $old_s, $l) {return $l; } insert-g function insert_g ($seq) {return function($new_s, $old_s, $l) use ($seq) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? $seq($new_s, $old_s, cdr($l)) : cons(car($l), insert_g($seq)($new_s, $old_s, cdr($l)))); }; } atom-to-function function atom_to_function ($operator) {return is_eq($operator, &#39;+&#39;) ? &#39;plus&#39; : (is_eq($operator, &#39;x&#39;) ? &#39;x&#39; : &#39;power&#39;); } value function value ($nexp) {return is_atom($nexp) ? $nexp : atom_to_function(operator($nexp)) (value(first_sub_exp($nexp)), value(second_sub_exp($nexp))); } multirember-f function multirember_f ($test) {return function($s, $l) use ($test) {return is_nulll($l) ? [] : ($test($s, car($l)) ? multirember_f($test)($s, cdr($l)) : cons(car($l), multirember_f($test)($s, cdr($l)))); }; } multirember-eq? $multirember_is_eq = multirember_f(&#39;is_eq&#39;); eq?-tuna $is_eq_tuna = is_eq_c(&#39;tuna&#39;); multirember&amp;co [4] function multirember_co ($s, $l, $col) {return is_nulll($l) ? $col([], []) : (is_eq($s, car($l)) ? multirember_co($s, cdr($l), function ($new_l, $seen) use ($col, $l) {return // new-friend $col($new_l, cons(car($l), $seen)); }) : (multirember_co($s, cdr($l), function ($new_l, $seen) use ($col, $l) {return // latest-friend $col(cons(car($l), $new_l), $seen); }))); } a-friend function a_friend ($s_1, $s_2) {return is_nulll($s_2); } last-friend function last_friend ($new_l, $seen) {return length($new_l); } multiinsertLR function multiinsert_left_right ($new_s, $old_L, $old_R, $l) {return is_nulll($l) ? [] : (is_eq($old_L, car($l)) ? cons($new_s, cons($old_L, multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))) : (is_eq($old_R, car($l)) ? cons($old_R, cons($new_s, multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))) : (cons(car($l), multiinsert_left_right($new_s, $old_L, $old_R, cdr($l)))))); } multiinsertLR&amp;co function multiinsert_left_right_co ($new_s, $old_L, $old_R, $l, $col) {return is_nulll($l) ? $col([], 0, 0) : (is_eq($old_L, car($l)) ? multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $new_s, $old_L) {return $col(cons($new_s, cons($old_L, $new_l)), add1($n_L), $n_R); }) : (is_eq($old_R, car($l)) ? multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $new_s, $old_R) {return $col(cons($old_R, cons($new_s, $new_l)), $n_L, add1($n_R)); }) : (multiinsert_left_right_co($new_s, $old_L, $old_R, cdr($l), function ($new_l, $n_L, $n_R) use ($col, $l) {return $col(cons(car($l), $new_l), $n_L, $n_R); })))); } even? function is_even ($n) {return is_eqn($n, x(division($n, 2), 2)); } evens-only* function evens_only_star ($l) {return is_nulll($l) ? [] : (is_atom(car($l)) ? is_even(car($l)) ? cons(car($l), evens_only_star(cdr($l))) : evens_only_star(cdr($l)) : cons(evens_only_star(car($l)), evens_only_star(cdr($l)))); } evens-only*&amp;co function evens_only_star_co ($l, $col) {return is_nulll($l) ? $col([], 1, 0) : (is_atom(car($l)) ? is_even(car($l)) ? evens_only_star_co(cdr($l), function ($new_l, $product, $sum) use ($col, $l) {return $col(cons(car($l), $new_l), x(car($l), $product), $sum); }) : evens_only_star_co(cdr($l), function ($new_l, $product, $sum) use ($col, $l) {return $col($new_l, $product, plus(car($l), $sum)); }) : evens_only_star_co(car($l), function ($a_l, $a_product, $a_sum) use ($col, $l) {return evens_only_star_co(cdr($l), function($d_l, $d_product, $d_sum) use ($col, $l, $a_l, $a_product, $a_sum) {return $col(cons($a_l, $d_l), x($a_product, $d_product), plus($a_sum, $d_sum)); }); })); } the-last-friend function the_last_friend ($new_l, $product, $sum) {return cons($sum, cons($product, $new_l)); }","@type":"BlogPosting","headline":"The Little PHPer - 8. Lambda the Ultimate","dateModified":"2018-06-23T00:00:00-07:00","datePublished":"2018-06-23T00:00:00-07:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css" />
+  <link rel="stylesheet" href="/assets/site.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="PHP" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">PHP</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Little PHPer - 8. Lambda the Ultimate</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-06-23T00:00:00-07:00" itemprop="datePublished">Jun 23, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <table>
+    <thead>
+        <tr>
+            <th>
+                Scheme
+            </th>
+            <th>
+                PHP
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+            <code>
+            rember-f
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">rember_f</span>
+<span class="p">(</span><span class="nv">$test</span><span class="p">,</span> <span class="nv">$s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nv">$test</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$s</span><span class="p">)</span> <span class="o">?</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+    <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">rember_f</span><span class="p">(</span><span class="nv">$test</span><span class="p">,</span> <span class="nv">$s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+<span class="p">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">rember_f</span>
+<span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="k">function</span> <span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span>
+        <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+        <span class="o">:</span> <span class="p">(</span><span class="nv">$test</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$s</span><span class="p">)</span> <span class="o">?</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> 
+          <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">rember_f</span><span class="p">(</span><span class="nv">$test</span><span class="p">)(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>eq?-c</code> 
+            <sup><a href="#currying">[1]</a>,</sup>
+            <sup><a href="#moses-s">[2]</a>,</sup>
+            <sup><a href="#haskell-c">[3]</a></sup>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_eq_c</span>
+<span class="p">(</span><span class="nv">$a</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="k">function</span> <span class="p">(</span><span class="nv">$x</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$a</span><span class="p">)</span>
+    <span class="p">{</span><span class="k">return</span>
+        <span class="nx">is_eq</span><span class="p">(</span><span class="nv">$x</span><span class="p">,</span> <span class="nv">$a</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            eq?-salad
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$is_eq_salad</span> <span class="o">=</span> <span class="nx">is_eq_c</span><span class="p">(</span><span class="s1">'salad'</span><span class="p">);</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            rember-eq?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$rember_is_eq</span> <span class="o">=</span> <span class="nx">rember_f</span><span class="p">(</span><span class="s1">'is_eq'</span><span class="p">);</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            insertL-f
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">insert_left_f</span>
+<span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="k">function</span> <span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+    <span class="p">{</span><span class="k">return</span> 
+        <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+        <span class="o">:</span> <span class="p">(</span><span class="nv">$test</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$old_s</span><span class="p">)</span> <span class="o">?</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)))</span>
+          <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">insert_left_f</span><span class="p">(</span><span class="nv">$test</span><span class="p">)(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            insertR-f
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">insert_right_f</span>
+<span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="k">function</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+    <span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nv">$test</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$old_s</span><span class="p">)</span> <span class="o">?</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)))</span>
+      <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">insert_right_f</span><span class="p">(</span><span class="nv">$test</span><span class="p">)(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            seqL
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">seq_l</span>
+<span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            seq_r
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">seq_r</span>
+<span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            seqS
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">seq_s</span>
+<span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            seqrem
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">seqrem</span>
+<span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nv">$l</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            insert-g
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">insert_g</span>
+<span class="p">(</span><span class="nv">$seq</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="k">function</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$seq</span><span class="p">)</span>
+    <span class="p">{</span><span class="k">return</span> 
+        <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+        <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$old_s</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$seq</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> 
+          <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">insert_g</span><span class="p">(</span><span class="nv">$seq</span><span class="p">)(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            atom-to-function
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">atom_to_function</span>
+<span class="p">(</span><span class="nv">$operator</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_eq</span><span class="p">(</span><span class="nv">$operator</span><span class="p">,</span> <span class="s1">'+'</span><span class="p">)</span> <span class="o">?</span> <span class="s1">'plus'</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nv">$operator</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">)</span> <span class="o">?</span> <span class="s1">'x'</span>
+      <span class="o">:</span> <span class="s1">'power'</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            value
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">value</span>
+<span class="p">(</span><span class="nv">$nexp</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_atom</span><span class="p">(</span><span class="nv">$nexp</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$nexp</span>
+    <span class="o">:</span> <span class="nx">atom_to_function</span><span class="p">(</span><span class="nx">operator</span><span class="p">(</span><span class="nv">$nexp</span><span class="p">))</span>
+        <span class="p">(</span><span class="nx">value</span><span class="p">(</span><span class="nx">first_sub_exp</span><span class="p">(</span><span class="nv">$nexp</span><span class="p">)),</span>
+            <span class="nx">value</span><span class="p">(</span><span class="nx">second_sub_exp</span><span class="p">(</span><span class="nv">$nexp</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            multirember-f
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">multirember_f</span>
+<span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="k">function</span><span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$test</span><span class="p">)</span>
+    <span class="p">{</span><span class="k">return</span> 
+        <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+        <span class="o">:</span> <span class="p">(</span><span class="nv">$test</span><span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="nx">multirember_f</span><span class="p">(</span><span class="nv">$test</span><span class="p">)(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span>
+          <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">multirember_f</span><span class="p">(</span><span class="nv">$test</span><span class="p">)(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+    <span class="p">};</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            multirember-eq?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$multirember_is_eq</span> <span class="o">=</span> <span class="nx">multirember_f</span><span class="p">(</span><span class="s1">'is_eq'</span><span class="p">);</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            eq?-tuna
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$is_eq_tuna</span> <span class="o">=</span> <span class="nx">is_eq_c</span><span class="p">(</span><span class="s1">'tuna'</span><span class="p">);</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>multirember&amp;co</code>
+            <sup><a href="#collector">[4]</a></sup>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">multirember_co</span>
+<span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nv">$l</span><span class="p">,</span> <span class="nv">$col</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$col</span><span class="p">([],</span> <span class="p">[])</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> 
+      <span class="nx">multirember_co</span><span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+          <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$seen</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+          <span class="p">{</span><span class="k">return</span> <span class="c1">// new-friend
+</span>              <span class="nv">$col</span><span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$seen</span><span class="p">));</span>
+          <span class="p">})</span>
+      <span class="o">:</span> <span class="p">(</span><span class="nx">multirember_co</span><span class="p">(</span><span class="nv">$s</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+          <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$seen</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+          <span class="p">{</span><span class="k">return</span> <span class="c1">// latest-friend
+</span>              <span class="nv">$col</span><span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$new_l</span><span class="p">),</span> <span class="nv">$seen</span><span class="p">);</span>
+          <span class="p">})));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            a-friend
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">a_friend</span>
+<span class="p">(</span><span class="nv">$s_1</span><span class="p">,</span> <span class="nv">$s_2</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$s_2</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            last-friend
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">last_friend</span>
+<span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$seen</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">length</span><span class="p">(</span><span class="nv">$new_l</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            multiinsertLR
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">multiinsert_left_right</span>
+<span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nv">$old_L</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span>
+      <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_L</span><span class="p">,</span>
+            <span class="nx">multiinsert_left_right</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))))</span>
+      <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nv">$old_R</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span>
+        <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span>
+            <span class="nx">multiinsert_left_right</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))))</span>
+        <span class="o">:</span> <span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+            <span class="nx">multiinsert_left_right</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))))));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            multiinsertLR&amp;co
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">multiinsert_left_right_co</span>
+<span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nv">$l</span><span class="p">,</span> <span class="nv">$col</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$col</span><span class="p">([],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nv">$old_L</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span>
+      <span class="nx">multiinsert_left_right_co</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$n_L</span><span class="p">,</span> <span class="nv">$n_R</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">)</span>
+            <span class="p">{</span><span class="k">return</span>
+                <span class="nv">$col</span><span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$new_l</span><span class="p">)),</span> <span class="nx">add1</span><span class="p">(</span><span class="nv">$n_L</span><span class="p">),</span> <span class="nv">$n_R</span><span class="p">);</span>
+            <span class="p">})</span>
+      <span class="o">:</span> <span class="p">(</span><span class="nx">is_eq</span><span class="p">(</span><span class="nv">$old_R</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span>
+        <span class="nx">multiinsert_left_right_co</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$n_L</span><span class="p">,</span> <span class="nv">$n_R</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">)</span>
+            <span class="p">{</span><span class="k">return</span>
+                <span class="nv">$col</span><span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$new_l</span><span class="p">)),</span> <span class="nv">$n_L</span><span class="p">,</span> <span class="nx">add1</span><span class="p">(</span><span class="nv">$n_R</span><span class="p">));</span>
+            <span class="p">})</span>
+        <span class="o">:</span> <span class="p">(</span><span class="nx">multiinsert_left_right_co</span><span class="p">(</span><span class="nv">$new_s</span><span class="p">,</span> <span class="nv">$old_L</span><span class="p">,</span> <span class="nv">$old_R</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$n_L</span><span class="p">,</span> <span class="nv">$n_R</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+            <span class="p">{</span><span class="k">return</span>
+                <span class="nv">$col</span><span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$new_l</span><span class="p">),</span> <span class="nv">$n_L</span><span class="p">,</span> <span class="nv">$n_R</span><span class="p">);</span>
+            <span class="p">}))));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            even?
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_even</span>
+<span class="p">(</span><span class="nv">$n</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_eqn</span><span class="p">(</span><span class="nv">$n</span><span class="p">,</span> <span class="nx">x</span><span class="p">(</span><span class="nx">division</span><span class="p">(</span><span class="nv">$n</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            evens-only*
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">evens_only_star</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="p">[]</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_atom</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> 
+        <span class="nx">is_even</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nx">evens_only_star</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">)))</span>
+        <span class="o">:</span> <span class="nx">evens_only_star</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span>
+      <span class="o">:</span> <span class="nx">cons</span><span class="p">(</span><span class="nx">evens_only_star</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">)),</span> <span class="nx">evens_only_star</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            evens-only*&amp;co
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">evens_only_star_co</span>
+<span class="p">(</span><span class="nv">$l</span><span class="p">,</span> <span class="nv">$col</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span> 
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$col</span><span class="p">([],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_atom</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span>
+        <span class="nx">is_even</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="nx">evens_only_star_co</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$product</span><span class="p">,</span> <span class="nv">$sum</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+            <span class="p">{</span><span class="k">return</span> 
+                <span class="nv">$col</span><span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$new_l</span><span class="p">),</span> <span class="nx">x</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$product</span><span class="p">),</span> <span class="nv">$sum</span><span class="p">);</span>
+            <span class="p">})</span>
+        <span class="o">:</span> <span class="nx">evens_only_star_co</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$product</span><span class="p">,</span> <span class="nv">$sum</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+            <span class="p">{</span><span class="k">return</span> 
+                <span class="nv">$col</span><span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$product</span><span class="p">,</span> <span class="nx">plus</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> <span class="nv">$sum</span><span class="p">));</span>
+            <span class="p">})</span>
+      <span class="o">:</span> <span class="nx">evens_only_star_co</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> 
+            <span class="k">function</span> <span class="p">(</span><span class="nv">$a_l</span><span class="p">,</span> <span class="nv">$a_product</span><span class="p">,</span> <span class="nv">$a_sum</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">)</span>
+            <span class="p">{</span><span class="k">return</span>
+                <span class="nx">evens_only_star_co</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">),</span> 
+                    <span class="k">function</span><span class="p">(</span><span class="nv">$d_l</span><span class="p">,</span> <span class="nv">$d_product</span><span class="p">,</span> <span class="nv">$d_sum</span><span class="p">)</span> 
+                    <span class="k">use</span> <span class="p">(</span><span class="nv">$col</span><span class="p">,</span> <span class="nv">$l</span><span class="p">,</span> <span class="nv">$a_l</span><span class="p">,</span> <span class="nv">$a_product</span><span class="p">,</span> <span class="nv">$a_sum</span><span class="p">)</span>
+                    <span class="p">{</span><span class="k">return</span>
+                        <span class="nv">$col</span><span class="p">(</span><span class="nx">cons</span><span class="p">(</span><span class="nv">$a_l</span><span class="p">,</span> <span class="nv">$d_l</span><span class="p">),</span> 
+                             <span class="nx">x</span><span class="p">(</span><span class="nv">$a_product</span><span class="p">,</span> <span class="nv">$d_product</span><span class="p">),</span> 
+                             <span class="nx">plus</span><span class="p">(</span><span class="nv">$a_sum</span><span class="p">,</span> <span class="nv">$d_sum</span><span class="p">));</span>
+                    <span class="p">});</span>
+            <span class="p">}));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+        <tr>
+            <td>
+            <code>
+            the-last-friend
+            </code>
+            </td>
+            <td>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">the_last_friend</span>
+<span class="p">(</span><span class="nv">$new_l</span><span class="p">,</span> <span class="nv">$product</span><span class="p">,</span> <span class="nv">$sum</span><span class="p">)</span>
+<span class="p">{</span><span class="k">return</span>
+    <span class="nx">cons</span><span class="p">(</span><span class="nv">$sum</span><span class="p">,</span> <span class="nx">cons</span><span class="p">(</span><span class="nv">$product</span><span class="p">,</span> <span class="nv">$new_l</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+        </tr>
+    </tbody>
+</table>
+
+<ol>
+    <li id="currying"><a href="https://en.wikipedia.org/wiki/Currying" target="_whitephp-ref">Curry-ing</a></li>
+    <li id="moses-s"><a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel" target="_whitephp-ref">Moses Schönfinkel</a></li>
+    <li id="haskell-c"><a href="https://en.wikipedia.org/wiki/Haskell_Curry" target="_whitephp-ref">Haskell B. Curry</a></li>
+    <li id="collector"><a href="https://en.wikipedia.org/wiki/Continuation-passing_style" target="_whitephp-ref">"collector"/"continuation"</a></li>
+<p></p>
+</ol>
+
+  </div><a class="u-url" href="/2018/06/23/the-little-phper-8-lambda-the-ultimate.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      
+      <ul class="contact-list">
+          <li class="p-name">
+          &copy; 2019 <a href="/">whitePHP.net</a>
+          </li>
+          
+      </ul>
+      </div>
+
+      
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
