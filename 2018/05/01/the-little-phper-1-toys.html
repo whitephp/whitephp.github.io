@@ -7,15 +7,15 @@
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="The Little PHPer - 1. Toys" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="PHP, Functional programing, Labmda calculus, Y combinator, Interperter." />
-<meta property="og:description" content="PHP, Functional programing, Labmda calculus, Y combinator, Interperter." />
+<meta name="description" content="Scheme PHP atom non-array [1] atom (quote atom) &#39;atom&#39; 1492 1492 *abc$ &#39;*abc$&#39; list [2] array [3] (atom) (quote (atom)) [&#39;atom&#39;] (atom turkey or) [&#39;atom&#39;, &#39;turkey&#39;, &#39;or&#39;] ((atom, turkey) or) [[&#39;atom&#39;, &#39;turkey&#39;], &#39;or&#39;] (((how) are) ((you) (doing so)) far) [[[&#39;how&#39;], &#39;are&#39;] [[&#39;you&#39;], [&#39;doing&#39;, &#39;so&#39;]], &#39;far&#39;] () [] (() () ()) [[], [], []] car function car ($l) {return $l[0]; } cdr [4] function cdr ($l) {return array_slice($l, 1); } cons function cons ($s, $l) {return array_merge([$s], $l); } null? function is_nulll ($l) {return [] === $l; } atom? function is_atom ($s) {return ! is_array($s); } eq? function is_eq ($s1, $s2) {return $s1 === $s2; }" />
+<meta property="og:description" content="Scheme PHP atom non-array [1] atom (quote atom) &#39;atom&#39; 1492 1492 *abc$ &#39;*abc$&#39; list [2] array [3] (atom) (quote (atom)) [&#39;atom&#39;] (atom turkey or) [&#39;atom&#39;, &#39;turkey&#39;, &#39;or&#39;] ((atom, turkey) or) [[&#39;atom&#39;, &#39;turkey&#39;], &#39;or&#39;] (((how) are) ((you) (doing so)) far) [[[&#39;how&#39;], &#39;are&#39;] [[&#39;you&#39;], [&#39;doing&#39;, &#39;so&#39;]], &#39;far&#39;] () [] (() () ()) [[], [], []] car function car ($l) {return $l[0]; } cdr [4] function cdr ($l) {return array_slice($l, 1); } cons function cons ($s, $l) {return array_merge([$s], $l); } null? function is_nulll ($l) {return [] === $l; } atom? function is_atom ($s) {return ! is_array($s); } eq? function is_eq ($s1, $s2) {return $s1 === $s2; }" />
 <link rel="canonical" href="http://localhost:4000/2018/05/01/the-little-phper-1-toys.html" />
 <meta property="og:url" content="http://localhost:4000/2018/05/01/the-little-phper-1-toys.html" />
 <meta property="og:site_name" content="PHP" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-05-01T00:00:00-07:00" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2018/05/01/the-little-phper-1-toys.html","headline":"The Little PHPer - 1. Toys","dateModified":"2018-05-01T00:00:00-07:00","datePublished":"2018-05-01T00:00:00-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/05/01/the-little-phper-1-toys.html"},"description":"PHP, Functional programing, Labmda calculus, Y combinator, Interperter.","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"http://localhost:4000/2018/05/01/the-little-phper-1-toys.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/05/01/the-little-phper-1-toys.html"},"description":"Scheme PHP atom non-array [1] atom (quote atom) &#39;atom&#39; 1492 1492 *abc$ &#39;*abc$&#39; list [2] array [3] (atom) (quote (atom)) [&#39;atom&#39;] (atom turkey or) [&#39;atom&#39;, &#39;turkey&#39;, &#39;or&#39;] ((atom, turkey) or) [[&#39;atom&#39;, &#39;turkey&#39;], &#39;or&#39;] (((how) are) ((you) (doing so)) far) [[[&#39;how&#39;], &#39;are&#39;] [[&#39;you&#39;], [&#39;doing&#39;, &#39;so&#39;]], &#39;far&#39;] () [] (() () ()) [[], [], []] car function car ($l) {return $l[0]; } cdr [4] function cdr ($l) {return array_slice($l, 1); } cons function cons ($s, $l) {return array_merge([$s], $l); } null? function is_nulll ($l) {return [] === $l; } atom? function is_atom ($s) {return ! is_array($s); } eq? function is_eq ($s1, $s2) {return $s1 === $s2; }","@type":"BlogPosting","headline":"The Little PHPer - 1. Toys","dateModified":"2018-05-01T00:00:00-07:00","datePublished":"2018-05-01T00:00:00-07:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css" />
   <link rel="stylesheet" href="/assets/site.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="PHP" /></head>
@@ -46,17 +46,7 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <style>
-.wrapper {
-    max-width: 801px;   
-}
-
-tr td {
-    vertical-align: middle;   
-}
-</style>
-
-<table>
+    <table>
     <thead>
         <tr>
             <th>
@@ -78,41 +68,27 @@ tr td {
         </tr>
         <tr>
             <td>
-                <code>
-                atom
-                </code><br />
-                <code>
-                (quote atom)
-                </code>
+                <code>atom</code><br />
+                <code>(quote atom)</code>
             </td>
             <td>
-                <code>
-                'atom'
-                </code>
+                <code>'atom'</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                1492
-                </code>
+                <code>1492</code>
             </td>
             <td>
-                <code>
-                1492
-                </code>
+                <code>1492</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                *abc$
-                </code>
+                <code>*abc$</code>
             </td>
             <td>
-                <code>
-                '*abc$'
-                </code>
+                <code>'*abc$'</code>
             </td>
         </tr>
         <tr>
@@ -125,84 +101,56 @@ tr td {
         </tr>
         <tr>
             <td>
-                <code>
-                (atom)
-                </code><br />
-                <code>
-                (quote (atom))
-                </code>
+                <code>(atom)</code><br />
+                <code>(quote (atom))</code>
             </td>
             <td>
-                <code>
-                ['atom']
-                </code>
+                <code>['atom']</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                (atom turkey or)
-                </code>
+                <code>(atom turkey or)</code>
             </td>
             <td>
-                <code>
-                ['atom', 'turkey', 'or']
-                </code>
+                <code>['atom', 'turkey', 'or']</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                ((atom, turkey) or)
-                </code>
+                <code>((atom, turkey) or)</code>
             </td>
             <td>
-                <code>
-                [['atom', 'turkey'], 'or']
-                </code>
+                <code>[['atom', 'turkey'], 'or']</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                (((how) are) ((you) (doing so)) far)
-                </code>
+                <code>(((how) are) ((you) (doing so)) far)</code>
             </td>
             <td>
-                <code>
-                [[['how'], 'are'] [['you'], ['doing', 'so']], 'far']
-                </code>
+                <code>[[['how'], 'are'] [['you'], ['doing', 'so']], 'far']</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                ()
-                </code>
+                <code>()</code>
             </td>
             <td>
-                <code>
-                []
-                </code>
+                <code>[]</code>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                (() () ())
-                </code>
+                <code>(() () ())</code>
             </td>
             <td>
-                <code>
-                [[], [], []]
-                </code>
+                <code>[[], [], []]</code>
             </td>
         </tr>
         <tr>
-            <td>
-                <code><strong>
-                car
-                </strong></code>
+            <td class="primitive">
+                <code>car</code>
             </td>
             <td>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">car</span>
@@ -213,10 +161,8 @@ tr td {
 </td>
         </tr>
         <tr>
-            <td>
-                <code><strong>
-                cdr</strong></code> 
-                <sup><a href="#car-and-cdr">[4]</a></sup>
+            <td class="primitive">
+                <code>cdr</code> <sup><a href="#car-and-cdr">[4]</a></sup>
             </td>
             <td>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">cdr</span>
@@ -227,10 +173,8 @@ tr td {
 </td>
         </tr>
         <tr>
-            <td>
-                <code><strong>
-                cons
-                </strong></code>
+            <td class="primitive">
+                <code>cons</code>
             </td>
             <td>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">cons</span>
@@ -241,10 +185,8 @@ tr td {
 </td>
         </tr>
         <tr>
-            <td>
-                <code><strong>
-                null?
-                </strong></code>
+            <td class="primitive">
+                <code>null?</code>
             </td>
             <td>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_nulll</span>
@@ -255,10 +197,8 @@ tr td {
 </td>
         </tr>
         <tr>
-            <td>
-                <code><strong>
-                atom?
-                </strong></code>
+            <td class="primitive">
+                <code>atom?</code>
             </td>
             <td>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_atom</span>
@@ -269,8 +209,8 @@ tr td {
 </td>
         </tr>
         <tr>
-            <td>
-                <code><strong>eq?</strong></code>
+            <td class="primitive">
+                <code>eq?</code>
             </td>
             <td>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_eq</span>

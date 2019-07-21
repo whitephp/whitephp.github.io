@@ -6,10 +6,27 @@
     color: #828282;
 }
 
-tr td {
- vertical-align: top;
+.highlight, td > pre {
+    float: left;
+}
+.highlight, pre, code {
+    margin-bottom:1px;
+    margin-right:1px;
 }
 
-.sup-block {
-    float: right;
+pre, code {
+    background-color: #fafafa;
+}
+
+td {
+    vertical-align: top;
+    white-space: nowrap
+}
+
+td.primitive {
+    vertical-align: middle;
+}
+
+td.primitive > code {
+    font-weight: bold;
 }

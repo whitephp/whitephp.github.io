@@ -7,15 +7,15 @@
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="The Little PHPer - 2. Do It, Do It Again, and Again, and Again…" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;$foo) {return | {return body; | body; } | } [1], [2] (cond (p1 e1) (p2 e2) ... (else en)) p1 ? e1 : p2 ? e2 : ... en; [3] #t TRUE [4] #f FALSE (or ...) ... or ... [5] (define lat? (lambda l (cond ((null? l) #t) ((atom? (car l)) (lat? (cdr l))) (else #f)))) function is_lat ($l) {return is_nulll($l) ? TRUE : is_atom(car($l)) ? is_lat(cdr($l)) : FALSE; } (define member? (lambda (a lat) (cond ((null? lat) #f) (else (or (eq? (car lat) a) (member? a (cdr lat))))))) function is_member ($a, $lat) {return is_nulll($l) ? FALSE : is_eq($a, car($lat)) or is_member($a, cdr($lat)); }" />
-<meta property="og:description" content="Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;$foo) {return | {return body; | body; } | } [1], [2] (cond (p1 e1) (p2 e2) ... (else en)) p1 ? e1 : p2 ? e2 : ... en; [3] #t TRUE [4] #f FALSE (or ...) ... or ... [5] (define lat? (lambda l (cond ((null? l) #t) ((atom? (car l)) (lat? (cdr l))) (else #f)))) function is_lat ($l) {return is_nulll($l) ? TRUE : is_atom(car($l)) ? is_lat(cdr($l)) : FALSE; } (define member? (lambda (a lat) (cond ((null? lat) #f) (else (or (eq? (car lat) a) (member? a (cdr lat))))))) function is_member ($a, $lat) {return is_nulll($l) ? FALSE : is_eq($a, car($lat)) or is_member($a, cdr($lat)); }" />
+<meta name="description" content="Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;$foo) {return | {return body; | body; } | }; [1], [2] (cond (p1 e1) (p2 e2) ... (else en))" />
+<meta property="og:description" content="Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;$foo) {return | {return body; | body; } | }; [1], [2] (cond (p1 e1) (p2 e2) ... (else en))" />
 <link rel="canonical" href="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html" />
 <meta property="og:url" content="http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html" />
 <meta property="og:site_name" content="PHP" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-05-03T00:00:00-07:00" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html","headline":"The Little PHPer - 2. Do It, Do It Again, and Again, and Again…","dateModified":"2018-05-03T00:00:00-07:00","datePublished":"2018-05-03T00:00:00-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html"},"description":"Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;$foo) {return | {return body; | body; } | } [1], [2] (cond (p1 e1) (p2 e2) ... (else en)) p1 ? e1 : p2 ? e2 : ... en; [3] #t TRUE [4] #f FALSE (or ...) ... or ... [5] (define lat? (lambda l (cond ((null? l) #t) ((atom? (car l)) (lat? (cdr l))) (else #f)))) function is_lat ($l) {return is_nulll($l) ? TRUE : is_atom(car($l)) ? is_lat(cdr($l)) : FALSE; } (define member? (lambda (a lat) (cond ((null? lat) #f) (else (or (eq? (car lat) a) (member? a (cdr lat))))))) function is_member ($a, $lat) {return is_nulll($l) ? FALSE : is_eq($a, car($lat)) or is_member($a, cdr($lat)); }","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/05/03/the-little-phper-2-do-it-again-and-again.html"},"description":"Scheme PHP (define foo (lambda (a b c) (body ))) function foo | $foo = function ($a, $b, $c) | ($a, $b, $c) use (&amp;$foo) {return | {return body; | body; } | }; [1], [2] (cond (p1 e1) (p2 e2) ... (else en))","@type":"BlogPosting","headline":"The Little PHPer - 2. Do It, Do It Again, and Again, and Again…","dateModified":"2018-05-03T00:00:00-07:00","datePublished":"2018-05-03T00:00:00-07:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css" />
   <link rel="stylesheet" href="/assets/site.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="PHP" /></head>
@@ -46,7 +46,13 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <table>
+    <style>
+.post-title {
+    font-size: 29px;   
+}
+</style>
+
+<table>
     <thead>
         <tr>
             <th>
@@ -69,12 +75,12 @@
             </td>
             <td>
                 <pre>
-function foo        |       $foo = function
-($a, $b, $c)        |       ($a, $b, $c) use (&amp;$foo)
-{return             |       {return
-    body;           |           body;
-}                   |       }</pre>
-                <div class="sup-block"><sup><a href="#php-function">[1]</a>,</sup> <sup><a href="#php-lambda">[2]</a></sup></div>
+function foo      |     $foo = function
+($a, $b, $c)      |     ($a, $b, $c) use (&amp;$foo)
+{return           |     {return
+    body;         |         body;
+}                 |     };</pre>
+                <sup><a href="#php-function">[1]</a>,</sup> <sup><a href="#php-lambda">[2]</a></sup>
             </td>
         </tr>
         <tr>
@@ -87,45 +93,33 @@ function foo        |       $foo = function
   (else en))</pre>
             </td>
             <td>
-            <br />
                 <pre>
-p1 ? e1 :
-p2 ? e2 :
-...
-en;</pre>
-                <div class="sup-block"><sup><a href="#php-ternary">[3]</a></sup></div>
+
+p1 ? e1 
+: (p2 ? e2
+  ...
+  : en);</pre>
+                <sup><a href="#php-ternary">[3]</a></sup>
+            </td>
+        </tr>
+        <tr>
+            <td class="primitive">
+                <code>#t</code> <br />
+                <code>#f</code>
+            </td>
+            <td class="primitive">
+                <code>TRUE</code> <br />
+                <code>FALSE</code> <sup><a href="#php-boolean">[4]</a></sup>
             </td>
         </tr>
         <tr>
             <td>
-                <code>
-                    #t
-                </code>
+                <code>(<b>or</b> ...)</code> <br />
+                <code>(<b>and</b> ...)</code>
             </td>
             <td>
-                <code>TRUE</code> <sup><a href="#php-boolean">[4]</a></sup>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <code>
-                    #f
-                </code>
-            </td>
-            <td>
-                <code>
-                    FALSE
-                </code>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <code>
-                (or ...)
-                </code>
-            </td>
-            <td>
-                <code>... or ...</code> 
+                <code>... <b>or</b> ...</code> <br />
+                <code>... <b>and</b> ...</code> 
                 <sup><a href="#php-logical">[5]</a></sup>
             </td>
         </tr>
@@ -143,9 +137,9 @@ en;</pre>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_lat</span>
 <span class="p">(</span><span class="nv">$l</span><span class="p">)</span>
 <span class="p">{</span><span class="k">return</span> 
-    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="k">TRUE</span> <span class="o">:</span>
-    <span class="nx">is_atom</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="nx">is_lat</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">:</span>
-    <span class="k">FALSE</span><span class="p">;</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="k">TRUE</span> 
+    <span class="o">:</span> <span class="p">(</span><span class="nx">is_atom</span><span class="p">(</span><span class="nx">car</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span> <span class="o">?</span> <span class="nx">is_lat</span><span class="p">(</span><span class="nx">cdr</span><span class="p">(</span><span class="nv">$l</span><span class="p">))</span>
+      <span class="o">:</span> <span class="k">FALSE</span><span class="p">);</span>
 <span class="p">}</span></code></pre></figure>
 </td>
         </tr>
@@ -163,8 +157,8 @@ en;</pre>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="k">function</span> <span class="nf">is_member</span>
 <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$lat</span><span class="p">)</span>
 <span class="p">{</span><span class="k">return</span> 
-    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="k">FALSE</span> <span class="o">:</span>
-    <span class="nx">is_eq</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$lat</span><span class="p">))</span> <span class="k">or</span> <span class="nx">is_member</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$lat</span><span class="p">));</span>
+    <span class="nx">is_nulll</span><span class="p">(</span><span class="nv">$l</span><span class="p">)</span> <span class="o">?</span> <span class="k">FALSE</span> 
+    <span class="o">:</span> <span class="nx">is_eq</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nx">car</span><span class="p">(</span><span class="nv">$lat</span><span class="p">))</span> <span class="o">||</span> <span class="nx">is_member</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nx">cdr</span><span class="p">(</span><span class="nv">$lat</span><span class="p">));</span>
 <span class="p">}</span></code></pre></figure>
 </td>
         </tr>
