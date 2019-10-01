@@ -80,15 +80,17 @@
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"no_file_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
-<p>It’s possilbe to remove all the whitespaces by passing <code class="highlighter-rouge">0</code> as the 2nd parameter like:</p>
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>jf data.json 0</code></pre></figure>
+<p>It’s possible to reverse the behavior, say, remove all the white-spaces by passing <code class="highlighter-rouge">0</code> as the 2nd parameter like:</p>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>jf data_formatted.json 0</code></pre></figure>
+<p>Or,</p>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>jf data_formatted.json 0 <span class="o">&gt;</span> data.json</code></pre></figure>
 <p>More options depend on the <a href="https://www.php.net/manual/en/json.constants.php" target="_whitephp-ref">JSON constants</a> provided.</p>
 
 <h3 id="in-vim">In VIM</h3>
 
 <p>Format current file:</p>
 <figure class="highlight"><pre><code class="language-viml" data-lang="viml"><span class="p">:</span>%<span class="p">!</span>jf %</code></pre></figure>
-<p>or add a keymap in <code class="highlighter-rouge">vimrc</code>:</p>
+<p>Or add a keymap in <code class="highlighter-rouge">vimrc</code>:</p>
 <figure class="highlight"><pre><code class="language-viml" data-lang="viml">nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span>jf <span class="p">:</span>%<span class="p">!</span>jf %<span class="p">&lt;</span>CR<span class="p">&gt;</span></code></pre></figure>
 
   </div><a class="u-url" href="/2018/07/31/jf-cli-json-formatter.html" hidden></a>
