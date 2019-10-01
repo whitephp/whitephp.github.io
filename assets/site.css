@@ -6,10 +6,10 @@
     color: #828282;
 }
 
-.highlight, td > pre {
+td > .highlight, td > pre {
     float: left;
 }
-.highlight, pre, code {
+td > .highlight, pre, code {
     margin-bottom:1px;
     margin-right:1px;
 }
