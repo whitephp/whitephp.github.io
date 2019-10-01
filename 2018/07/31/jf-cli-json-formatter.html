@@ -48,7 +48,7 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>It’s easy to write a CLI tool of JSON Formatter by PHP, since a new <a href="https://www.php.net/manual/en/json.constants.php" target="_whitephp-ref">JSON constant</a> JSON_PRETTY_PRINT is available as of PHP 5.4.0. Essential implementation looks like:</p>
+    <p>It’s easy to write a CLI tool of JSON Formatter by PHP, since a new <a href="https://www.php.net/manual/en/json.constants.php" target="_whitephp-ref">JSON constant</a> <strong>JSON_PRETTY_PRINT</strong> is available as of PHP 5.4.0. Essential implementation looks like:</p>
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
 <span class="k">echo</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nb">json_decode</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> 
