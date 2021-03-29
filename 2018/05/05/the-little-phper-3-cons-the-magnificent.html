@@ -18,7 +18,16 @@
 {"url":"http://whitephp.net/2018/05/05/the-little-phper-3-cons-the-magnificent.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://whitephp.net/2018/05/05/the-little-phper-3-cons-the-magnificent.html"},"description":"Scheme PHP [Source Code] rember function rember ($s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $s) ? cdr($l) : cons(car($l), rember($s, cdr($l)))); } firsts function firsts ($l) {return is_nulll($l) ? [] : cons(car(car($l)), firsts(cdr($l))); } insertR function insert_right ($new_s, $old_s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? cons($old_s, cons($new_s, cdr($l))) : cons(car($l), insert_right($new_s, $old_s, cdr($l)))); } insertL function insert_left ($new_s, $old_s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? cons($new_s, $l) : cons(car($l), insert_left($new_s, $old_s, cdr($l)))); } subst function subst ($new_s, $old_s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? cons($new_s, cdr($l)) : cons(car($l), subst($new_s, $old_s, cdr($l)))); } subst2 function subst2 ($new_s, $old_s1, $old_s2, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s1) || is_eq(car($l), $old_s2) ? cons($new_s, cdr($l)) : cons(car($l), subst2($new_s, $old_s1, $old_s2, cdr($l)))); } multirember function multirember ($s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $s) ? multirember($s, cdr($l)) : cons(car($l), multirember($s, cdr($l)))); } multiinsertR function multiinsert_right ($new_s, $old_s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? cons($old_s, cons($new_s, multiinsert_right($new_s, $old_s, cdr($l)))) : cons(car($l), multiinsert_right($new_s, $old_s, cdr($l)))); } multiinsertL function multiinsert_left ($new_s, $old_s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? cons($new_s, cons($old_s, multiinsert_left($new_s, $old_s, cdr($l)))) : cons(car($l), multiinsert_left($new_s, $old_s, cdr($l)))); } multisubst function multisubst ($new_s, $old_s, $l) {return is_nulll($l) ? [] : (is_eq(car($l), $old_s) ? cons($new_s, multisubst($new_s, $old_s, cdr($l))) : cons(car($l), multisubst($new_s, $old_s, cdr($l)))); }","@type":"BlogPosting","headline":"The Little PHPer - 3. Cons the Magnificent","dateModified":"2018-05-05T00:00:00-07:00","datePublished":"2018-05-05T00:00:00-07:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css" />
-  <link rel="stylesheet" href="/assets/site.css" /><link type="application/atom+xml" rel="alternate" href="http://whitephp.net/feed.xml" title="PHP" /></head>
+  <link rel="stylesheet" href="/assets/site.css" /><link type="application/atom+xml" rel="alternate" href="http://whitephp.net/feed.xml" title="PHP" /><!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLS5FCERYC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CLS5FCERYC');
+  </script>
+</head>
 <body><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/" title="Oh, it's a white elephant.">
